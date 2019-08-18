@@ -12,6 +12,12 @@ import org.springframework.test.context.ContextCustomizer;
 import org.springframework.test.context.MergedContextConfiguration;
 
 
+/**
+ * ContextCustomizer to run Kafka servers in tests,
+ * when find a {@link com.jupitertools.springtestkafka.KafkaTestContainer} annotation.
+ *
+ * @author Anatoliy Korovin
+ */
 public class KafkaContainerContextCustomizer implements ContextCustomizer {
 
 	private static final Logger log = LoggerFactory.getLogger(KafkaContainerContextCustomizer.class);

@@ -14,7 +14,13 @@ import org.springframework.test.context.ContextCustomizer;
 import org.springframework.test.context.ContextCustomizerFactory;
 
 
-
+/**
+ * ContextCustomizerFactory to find a {@link KafkaTestContainer} annotation
+ * in tests and make a different context configuration for different set of
+ * kafka instances in tests.
+ *
+ * @author Anatoliy Korovin
+ */
 public class KafkaContextCustomizerFactory implements ContextCustomizerFactory {
 
 	@Override

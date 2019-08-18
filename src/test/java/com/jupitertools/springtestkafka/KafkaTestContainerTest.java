@@ -16,6 +16,12 @@ import org.springframework.kafka.core.KafkaTemplate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
+/**
+ * A simple test which runs a Kafka instance in docker
+ * and makes some actions with this instance.
+ *
+ * @author Anatoliy Korovin
+ */
 @KafkaTestContainer
 @SpringBootTest
 class KafkaTestContainerTest {

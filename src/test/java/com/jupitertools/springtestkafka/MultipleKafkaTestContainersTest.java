@@ -30,6 +30,11 @@ import org.springframework.kafka.core.ProducerFactory;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
+/**
+ * Run multiple instances of Apache Kafka in the single test case.
+ *
+ * @author Anatoliy Korovin
+ */
 @KafkaTestContainer(bootstrapServersPropertyName = "first.kafka.server")
 @KafkaTestContainer(bootstrapServersPropertyName = "second.kafka.server")
 @SpringBootTest
