@@ -11,11 +11,11 @@
 
     <groupId>com.jupiter-tools</groupId>
     <artifactId>spring-test-kafka</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <packaging>jar</packaging>
 
     <name>spring-test-kafka</name>
-    <description>TestContainers wrapper around Kafka for Spring Boot</description>
+    <description>TestContainers wrapper around the Apache Kafka for Spring Boot applications</description>
     <url>https://github.com/jupiter-tools/spring-test-kafka</url>
     <scm>
         <url>https://github.com/jupiter-tools/spring-test-kafka</url>
