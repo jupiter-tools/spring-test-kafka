@@ -11,7 +11,7 @@
 
     <groupId>com.jupiter-tools</groupId>
     <artifactId>spring-test-kafka</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
     <packaging>jar</packaging>
 
     <name>spring-test-kafka</name>
@@ -87,7 +87,7 @@
         <dependency>
             <groupId>com.jupiter-tools</groupId>
             <artifactId>spring-test-core</artifactId>
-            <version>0.4-SNAPSHOT</version>
+            <version>0.4</version>
         </dependency>
         <!-- import DataSets -->
 

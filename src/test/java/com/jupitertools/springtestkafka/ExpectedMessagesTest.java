@@ -2,7 +2,6 @@ package com.jupitertools.springtestkafka;
 
 import java.util.Date;
 
-import com.jupitertools.springtestkafka.expected.KafkaExpectedMessagesExtension;
 import com.jupitertools.springtestkafka.expected.annotation.EnableKafkaTest;
 import com.jupitertools.springtestkafka.expected.annotation.ExpectedMessages;
 import com.jupitertools.springtestkafka.expected.annotation.NoMessagesExpected;
@@ -11,9 +10,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,7 +20,7 @@ import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
 @KafkaTestContainer
-@EnableKafkaTest(topics = {"test-topic", "wow"})
+@EnableKafkaTest(topics = {"untyped-test-topic", "simple-test-topic", "wow"})
 @TestPropertySource(properties = {
 		"spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer",
 		"spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer"
@@ -34,27 +31,17 @@ class ExpectedMessagesTest {
 	private KafkaTemplate<String, Object> kafkaTemplate;
 
 	@Test
-	@ExpectedMessages(topic = "test-topic", datasetFile = "/datasets/expected_simple.json")
+	@ExpectedMessages(topic = "simple-test-topic", datasetFile = "/datasets/expected_simple.json")
 	void firstTopic() {
-		kafkaTemplate.send("test-topic", Foo.builder()
-		                                .value("qwert")
-		                                .build());
-
-		kafkaTemplate.send("test-topic", Bar.builder()
-		                                .name("baaark")
-		                                .build());
+		kafkaTemplate.send("simple-test-topic", Foo.builder().value("qwert").build());
+		kafkaTemplate.send("simple-test-topic", Bar.builder().name("baaark").build());
 	}
 
 	@Test
-	@ExpectedMessages(topic = "test-topic", datasetFile = "/datasets/expected_without_class_ref.json")
+	@ExpectedMessages(topic = "untyped-test-topic", datasetFile = "/datasets/expected_without_class_ref.json")
 	void withoutTypeRef() {
-		kafkaTemplate.send("test-topic", Foo.builder()
-		                                .value("qwert")
-		                                .build());
-
-		kafkaTemplate.send("test-topic", Bar.builder()
-		                                .name("baaark")
-		                                .build());
+		kafkaTemplate.send("untyped-test-topic", Foo.builder().value("qwert").build());
+		kafkaTemplate.send("untyped-test-topic", Bar.builder().name("baaark").build());
 	}
 
 	@Test
