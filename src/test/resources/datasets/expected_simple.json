@@ -1,0 +1,12 @@
+{
+  "com.jupitertools.springtestkafka.ExpectedMessagesExtensionTest$Foo": [
+    {
+      "value": "qwert"
+    }
+  ],
+  "com.jupitertools.springtestkafka.ExpectedMessagesExtensionTest$Bar": [
+    {
+      "name": "baaark"
+    }
+  ]
+}
