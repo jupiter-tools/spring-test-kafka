@@ -76,8 +76,8 @@ Just describe expected dataset for a test case by the using `@ExpectedDataSet` a
 @EnableKafkaTest(topics = {"test-topic", "another-topic"})
 class ExpectedMessagesTest {
 
-	@Autowired
-	private KafkaTemplate<String, Object> kafkaTemplate;
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
 
 
     @Test
