@@ -88,10 +88,19 @@ class ExpectedMessagesTest {
     }
 
     @Test
-	@ExpectedMessages(topic = "another-topic", datasetFile = "/datasets/expected_another_event.json")
-	void anotherTopic() {
-		kafkaTemplate.send("another-topic", Bar.builder().time(new Date()).build());
-	}
+    @ExpectedMessages(topic = "another-topic", datasetFile = "/datasets/expected_another_event.json")
+    void anotherTopic() {
+        kafkaTemplate.send("another-topic", Bar.builder().time(new Date()).build());
+    }
+}
+
+class Foo {
+    String value;
+}
+
+class Bar {
+    String name;
+    Date time;
 }
 ----
 
