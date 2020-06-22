@@ -62,3 +62,68 @@ class MultipleContainerInOneTest {
 ----
 <1> start a first Kafka test container and set a bootstrap servers of started container to default Spring Boot properties (`spring.kafka.bootstrap-servers`)
 <2> start one more Kafka container and set a bootstrap servers to specified property, exactly in this property you can read an actual value of bootstrap servers after run the application context.
+
+
+## A better way to test your data in integration tests
+
+You can test received messages after test execution if you use JSON format.
+Just describe expected dataset for a test case by the using `@ExpectedDataSet` annotation:
+
+[source, java]
+----
+@SpringBootTest
+@KafkaTestContainer
+@EnableKafkaTest(topics = {"test-topic", "another-topic"})
+class ExpectedMessagesTest {
+
+	@Autowired
+	private KafkaTemplate<String, Object> kafkaTemplate;
+
+
+    @Test
+    @ExpectedMessages(topic = "test-topic", datasetFile = "/datasets/expected_event.json")
+    void firstTopic() {
+        kafkaTemplate.send("test-topic", new Foo("qwert"));
+        kafkaTemplate.send("test-topic", new Bar("baaark"));
+    }
+
+    @Test
+	@ExpectedMessages(topic = "another-topic", datasetFile = "/datasets/expected_another_event.json")
+	void anotherTopic() {
+		kafkaTemplate.send("another-topic", Bar.builder().time(new Date()).build());
+	}
+}
+----
+
+And after test execution, we will wait for messages declared in this JSON file.
+The content of JSON dataset file:
+
+[source, json]
+----
+{
+  "com.kafkatest.example.events.Foo": [
+    {
+      "value": "qwert"
+    }
+  ],
+  "com.kafkatest.example.events.Bar": [
+    {
+      "name": "baaark"
+    }
+  ]
+}
+----
+
+Also, you can use `@NoMessagesExpected` to check the silence on air.
+Receiving any messages will fail the test case.
+
+[source, java]
+----
+@Test
+@NoMessagesExpected(timeout = 3000)
+void silence() {
+
+}
+----
+Waits during the timeout for messages in Kafka topics(set in `@EnableKafkaTest`),
+if receive something then throws an exception.

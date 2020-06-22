@@ -33,7 +33,7 @@ class KafkaTestContainerTest {
 	void sendAndReceiveTest() throws InterruptedException {
 		// Arrange
 		assertThat(kafkaTemplate).isNotNull();
-		kafkaTemplate.send("test-topic", "flight of a dragon");
+		kafkaTemplate.send("test-topic-1", "flight of a dragon");
 		// Wait
 		Awaitility.await()
 		          .atMost(5, TimeUnit.SECONDS)
@@ -48,7 +48,7 @@ class KafkaTestContainerTest {
 
 		static List<String> invocations = new ArrayList<>();
 
-		@KafkaListener(topics = "test-topic", groupId = "test-group")
+		@KafkaListener(topics = "test-topic-1", groupId = "test-group")
 		public void onKafkaEvent(String message) {
 			invocations.add(message);
 		}

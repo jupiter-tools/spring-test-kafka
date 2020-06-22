@@ -1,0 +1,7 @@
+{
+  "com.jupitertools.springtestkafka.ExpectedMessagesExtensionTest$Bar": [
+    {
+      "time": "date-match:[NOW]"
+    }
+  ]
+}
