@@ -78,13 +78,9 @@ public class KafkaMessageBroker implements MessageBroker {
 	/**
 	 * Drop all received messages from Kafka
 	 */
-	public void reset() {
+	public void reset() throws InterruptedException {
 		log.info("reset KafkaTestConsumer.");
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		Thread.sleep(100);
 		topicDataHolder.clear();
 	}
 
