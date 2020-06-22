@@ -17,7 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
  * Junit5 extension to work with the data-sets in Kafka tests.
- *
+ * <p>
  * see {@link EnableKafkaTest}
  * see {@link ExpectedMessages}
  * see {@link NoMessagesExpected}
@@ -34,7 +34,8 @@ public class KafkaExpectedMessagesExtension implements BeforeAllCallback,
 	public void beforeAll(ExtensionContext extensionContext) throws Exception {
 		String bootstrap = getBootstrapProperties(extensionContext);
 		String[] topics = getTopics(extensionContext);
-		kafkaMessageBroker = new KafkaMessageBroker(bootstrap, topics);
+		Class<? extends TestConsumerConfig> consumerConfigClass = getConsumerConfigClass(extensionContext);
+		kafkaMessageBroker = new KafkaMessageBroker(bootstrap, topics, consumerConfigClass);
 		kafkaMessageBroker.start();
 	}
 
@@ -110,12 +111,10 @@ public class KafkaExpectedMessagesExtension implements BeforeAllCallback,
 	}
 
 
-
 	private String[] getTopics(ExtensionContext extensionContext) {
-
-		EnableKafkaTest enableKafkaTest = extensionContext.getRequiredTestClass()
-		                                                  .getAnnotation(EnableKafkaTest.class);
-		return enableKafkaTest.topics();
+		return extensionContext.getRequiredTestClass()
+		                       .getAnnotation(EnableKafkaTest.class)
+		                       .topics();
 	}
 
 
@@ -125,6 +124,12 @@ public class KafkaExpectedMessagesExtension implements BeforeAllCallback,
 		                                 .getProperty("spring.kafka.bootstrap-servers");
 		Assertions.assertNotNull(bootsrap, "Not found Kafka bootstap host:port in properties");
 		return bootsrap;
+	}
+
+	private Class<? extends TestConsumerConfig> getConsumerConfigClass(ExtensionContext extensionContext) {
+		return extensionContext.getRequiredTestClass()
+		                       .getAnnotation(EnableKafkaTest.class)
+		                       .testConsumerConfig();
 	}
 
 	@Override

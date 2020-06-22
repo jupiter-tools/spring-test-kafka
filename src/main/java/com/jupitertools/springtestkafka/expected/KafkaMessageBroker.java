@@ -31,7 +31,10 @@ public class KafkaMessageBroker implements MessageBroker {
 	private final ObjectMapper objectMapper;
 
 
-	public KafkaMessageBroker(String bootstrapProperties, String[] topicNames) {
+	public KafkaMessageBroker(String bootstrapProperties,
+	                          String[] topicNames,
+	                          Class<? extends TestConsumerConfig> consumerConfigClass) {
+
 		this.log = LoggerFactory.getLogger(KafkaMessageBroker.class);
 		this.objectMapper = new ObjectMapper();
 		this.topicDataHolder = new ConcurrentHashMap<>();
@@ -41,7 +44,8 @@ public class KafkaMessageBroker implements MessageBroker {
 
 		testConsumerContainer = kafkaContainerFactory.createContainer(bootstrapProperties,
 		                                                              topicNames,
-		                                                              kafkaTestConsumer);
+		                                                              kafkaTestConsumer,
+		                                                              consumerConfigClass);
 	}
 
 	/**
