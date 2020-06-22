@@ -8,7 +8,12 @@ import java.util.Map;
 import com.jupiter.tools.spring.test.core.expected.list.messages.DataSetPreProcessor;
 import com.jupitertools.datasetroll.DataSet;
 
-
+/**
+ * Replace class-ref in the data-set on the same string value (`events`),
+ * and collect all entries in this key.
+ *
+ * @author Korovin Anatoliy
+ */
 public class UntypedDataSetPreProcessor implements DataSetPreProcessor {
 
 	@Override
