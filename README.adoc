@@ -20,7 +20,7 @@ Add this library in dependencies:
 <dependency>
     <groupId>com.jupiter-tools</groupId>
     <artifactId>spring-test-kafka</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
 </dependency>
 ----
 
