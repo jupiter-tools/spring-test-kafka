@@ -5,7 +5,7 @@
 image:https://travis-ci.com/jupiter-tools/spring-test-kafka.svg?branch=master["Build Status", link="https://travis-ci.com/jupiter-tools/spring-test-kafka"]
 image:https://codecov.io/gh/jupiter-tools/spring-test-kafka/branch/master/graph/badge.svg["", link="https://codecov.io/gh/jupiter-tools/spring-test-kafka"]
 
-Tools to write integration tests of Spring Framework with Redis.
+Tools to write integration tests of Spring Framework with the Apache Kafka.
 
 ## Overview
 
